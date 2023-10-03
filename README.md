@@ -3,7 +3,7 @@
 # Definition
 
 This project is just a list of Marvel superheroes that shows some of their info if one of them is clicked.
-UI design as been keep basic, while most of the effort has been put into following MVVM/Clean principles and applying correct usage of Dagger injections and other libraries
+UI design has been kept basic, while most of the effort has been put into following MVVM/Clean principles and applying correct usage of Dagger injections and other libraries
 
 
 ## Architecture
