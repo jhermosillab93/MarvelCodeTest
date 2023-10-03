@@ -24,8 +24,10 @@ class CharactersMainActivity : ToolbarActivity() {
     }
 
     override fun onBackPressed() {
-        super.getOnBackPressedDispatcher().onBackPressed()
-        updateToolbarConfig(ToolbarConfig(imageView = R.drawable.ic_launcher_foreground))
+        if (supportFragmentManager.backStackEntryCount > 1) {
+            super.getOnBackPressedDispatcher().onBackPressed()
+            updateToolbarConfig(ToolbarConfig(imageView = R.drawable.ic_launcher_foreground))
+        }
     }
 
 
