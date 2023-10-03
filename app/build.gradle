@@ -1,0 +1,131 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.example.marvelcodetest'
+    compileSdk android_build.compile_sdk
+
+    defaultConfig {
+        applicationId "com.example.marvelcodetest"
+        minSdk android_build.min_sdk
+        targetSdk android_build.target_sdk
+        versionCode app.versionCode
+        versionName app.versionName
+        manifestPlaceholders.appName = app.appName
+        testBuildType "demo"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+
+        applicationVariants.configureEach { variant ->
+            variant.outputs.each { output ->
+                def project = app.appName
+                def buildType = variant.name
+                def SEP = "_"
+                def version = variant.versionName
+                output.outputFileName = "${project}${SEP}${buildType}${SEP}${version}.apk"
+            }
+        }
+    }
+
+    buildTypes {
+
+        demo {
+            initWith(buildTypes.debug)
+            buildConfigField "boolean", "IS_DEMO", "true"
+            manifestPlaceholders.appNamePrefix = "DEMO "
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        development {
+            initWith(buildTypes.debug)
+            buildConfigField "boolean", "IS_DEMO", "false"
+            manifestPlaceholders.appNamePrefix = ""
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //Since we are using custom buildTypes, we don't need to use default build variants
+    android.variantFilter { variant ->
+        if (variant.buildType.name.endsWith('debug') || variant.buildType.name.endsWith('release')) {
+            variant.setIgnore(true)
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(path: ':marvelbusinessapi')
+
+    //Architecture
+    implementation("androidx.lifecycle:lifecycle-extensions:$versions.lifecycle.version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle.ktx")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle.ktx")
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    //UI
+    implementation "androidx.constraintlayout:constraintlayout:$versions.libs.constraintlayout"
+    implementation "com.airbnb.android:lottie:$versions.libs.lottie"
+    implementation "androidx.cardview:cardview:$versions.libs.cardview"
+    implementation "com.github.bumptech.glide:glide:$versions.libs.glide"
+
+    // Utils
+    implementation 'androidx.core:core-ktx:1.8.0'
+
+    //  Dagger 2
+    implementation("com.google.dagger:dagger-android:$versions.libs.dagger")
+    implementation("com.google.dagger:dagger-android-support:$versions.libs.dagger")
+    kapt("com.google.dagger:dagger-compiler:$versions.libs.dagger")
+    kapt("com.google.dagger:dagger-android-processor:$versions.libs.dagger")
+    kaptTest("com.google.dagger:dagger-compiler:$versions.libs.dagger")
+    kaptTest("com.google.dagger:dagger-android-processor:$versions.libs.dagger")
+    kaptAndroidTest("com.google.dagger:dagger-compiler:$versions.libs.dagger")
+    kaptAndroidTest("com.google.dagger:dagger-android-processor:$versions.libs.dagger")
+
+    //  Rest Services
+    implementation libs.okhttp_logging
+    implementation libs.retrofit
+    implementation libs.retrofit_gson
+    implementation libs.retrofit_rxjava
+
+
+    //Testing dependencies
+    androidTestImplementation("org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin.kotlin_version")
+    androidTestImplementation("androidx.test:core:$versions.test.core")
+    androidTestImplementation("androidx.test:core-ktx:$versions.test.core")
+    androidTestImplementation ("androidx.test.ext:junit:$versions.test.ext")
+    androidTestImplementation("androidx.test.ext:junit-ktx:$versions.test.ext")
+    androidTestImplementation("androidx.test:runner:$versions.test.runner")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:$versions.test.espresso")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:$versions.test.espresso") {
+        exclude module: "protobuf-lite"
+    }
+    testImplementation("androidx.test:core:$versions.test.core")
+    testImplementation("androidx.test:core-ktx:$versions.test.core")
+    testImplementation("androidx.test.ext:junit:$versions.test.ext")
+    testImplementation("junit:junit:$versions.test.junit")
+    testImplementation("org.robolectric:robolectric:$versions.test.robolectric")
+    testImplementation("androidx.test.espresso:espresso-core:$versions.test.espresso")
+    testImplementation("androidx.test.espresso:espresso-intents:$versions.test.espresso")
+    testImplementation("androidx.test.ext:truth:$versions.test.truth")
+    testImplementation("org.mockito:mockito-core:$versions.test.mockito")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:$versions.test.mockitoKotlin")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.test.core")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+}

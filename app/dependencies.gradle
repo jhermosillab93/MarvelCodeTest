@@ -1,0 +1,67 @@
+ext {
+
+    app = [
+            appName    : 'MarvelCodeTest',
+            appId      : 'com.example.marvelcodetest',
+            versionName: '1.0.0', // X.Y.Z; X = Major, Y = Minor¡ Z = Patch
+            versionCode: 001
+    ]
+    android_build = [
+            build_tools: '33.0.2',
+            compile_sdk: 33,
+            min_sdk    : 24,
+            target_sdk : 33
+    ]
+
+    versions = [
+            kotlin       : [
+                    kotlin_version: '1.6.21',
+                    coroutines    : '1.6.3'
+            ],
+
+            build_plugins: [
+                    gradle         : '7.4.2'
+            ],
+
+            lifecycle    : [
+                    version: '2.2.0',
+                    ktx    : '2.5.1'
+            ],
+
+            libs         : [
+                    dagger             : '2.42',
+                    lottie             : '6.1.0',
+                    rx_android         : '1.2.1',
+                    cardview           : '1.0.0',
+                    okhttp             : '4.9.0',
+                    retrofit           : '2.9.0',
+                    rx_kotlin          : '2.1.0',
+                    swagger_annotations: '1.5.0',
+                    constraintlayout   : '2.1.4',
+                    glide              : '4.14.2'
+            ],
+
+            test         : [
+                    core            : '1.5.0',
+                    espresso        : '3.5.1',
+                    robolectric     : '4.10.3',
+                    truth           : '1.5.0',
+                    ext             : '1.1.5',
+                    runner          : '1.5.2',
+                    junit           : '4.12',
+                    mockito         : '4.8.1',
+                    mockitoKotlin   : '4.0.0'
+            ]
+
+    ]
+
+    libs = [
+            okhttp             : [group: 'com.squareup.okhttp3', name: 'okhttp', version: versions.libs.okhttp],
+            okhttp_logging     : [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: versions.libs.okhttp],
+            retrofit           : [group: 'com.squareup.retrofit2', name: 'retrofit', version: versions.libs.retrofit],
+            retrofit_gson      : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: versions.libs.retrofit],
+            retrofit_rxjava    : [group: 'com.squareup.retrofit2', name: 'adapter-rxjava', version: versions.libs.retrofit],
+            rx_android         : [group: 'io.reactivex', name: 'rxandroid', version: versions.libs.rx_android],
+            swagger_annotations: [group: 'io.swagger', name: 'swagger-annotations', version: versions.libs.swagger_annotations]
+    ]
+}

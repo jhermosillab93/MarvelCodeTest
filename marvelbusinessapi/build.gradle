@@ -1,0 +1,64 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    namespace 'com.example.marvelbusinessapi'
+    compileSdk android_build.compile_sdk
+    buildToolsVersion android_build.build_tools
+
+    defaultConfig {
+        minSdkVersion android_build.min_sdk
+        targetSdkVersion android_build.target_sdk
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        demo {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_URL", '"http://gateway.marvel.com/"'
+            buildConfigField "boolean", "IS_DEMO", "true"
+            buildConfigField "String", "PUBLIC_KEY", '"0288f0c865fd25c78130779f87a33cd1"'
+            buildConfigField "String", "PRIVATE_KEY", '"687b47e4be05ce90813b1a772346091afb441907"'
+        }
+        development {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_URL", '"http://gateway.marvel.com/"'
+            buildConfigField "boolean", "IS_DEMO", "false"
+            buildConfigField "String", "PUBLIC_KEY", '"0288f0c865fd25c78130779f87a33cd1"'
+            buildConfigField "String", "PRIVATE_KEY", '"687b47e4be05ce90813b1a772346091afb441907"'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
+dependencies {
+
+    //Default project implementation
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+
+    //Libs implementation
+    implementation libs.okhttp_logging
+    implementation libs.retrofit
+    implementation libs.retrofit_gson
+    implementation libs.retrofit_rxjava
+    implementation libs.rx_android
+    implementation libs.swagger_annotations
+
+    //Added libraries
+    implementation "com.google.dagger:dagger-android:$versions.libs.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.libs.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.libs.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.libs.dagger"
+
+
+}

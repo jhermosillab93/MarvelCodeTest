@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">MarvelCodeTest</string>
+
+    <!-- Toolbar -->
+    <string name="toolbar_transition">toolbar_transition</string>
+    <string name="go_back">Back</string>
+    <string name="error_title">We messed up</string>
+    <string name="error_body">Something didn\'t go as planned</string>
+
+    <!--App -->
+    <string name="description_not_available">Description not available</string>
+    <string name="character_name">Character name</string>
+    <string name="character_description">Character description</string>
+    <string name="number_of_comics">Number of comics</string>
+    <string name="number_of_series">Number of series</string>
+    <string name="link_to_comics">Link to comics</string>
+    <string name="comics_number">Appears in %1$s comics</string>
+    <string name="series_number">Appears in %1$s series</string>
+    <string name="character_detail">Character detail</string>
+    <string name="external_link_to_comics">External link to comics:</string>
+
+
+</resources>
