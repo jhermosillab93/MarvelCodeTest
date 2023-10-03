@@ -37,7 +37,11 @@ A simple UI Test has been included in the project in order to confirm the proper
 
 A basic unit test is also included. It was developed to try the function that obtains character thumbnail images from the object that Marvel API returns
 
-### Other information
+### Tips to compile the project
+Gradle JVM is needed to be set to Java version 17 in orden to run the app.
+If you are getting some "error: invalid source release: 17" report, you may need to go to "Android Studio -> Settings -> Build, Execution, Deployment -> Build Tools -> Gradle" and there, select your project and set Gradle JVM to java 17 (or corretto-17)
 
+### Other information
+Loading animation made with Lottie
 Glide has been used to load images into its corresponding views
 
